@@ -1,0 +1,28 @@
+.header {
+	max-width: 1024px;
+	margin: 0 auto 6rem;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	a {
+		font-size: 0.875rem;
+	}
+}
+
+@media (min-width: 768px) {
+	.header {
+		flex-direction: row;
+		gap: 0;
+
+		nav {
+			margin-left: auto;
+		}
+
+		img {
+			margin-right: 0.75rem;
+		}
+	}
+}
