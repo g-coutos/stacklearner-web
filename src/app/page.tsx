@@ -26,9 +26,9 @@ export default function Home() {
 					>
 						Guilherme&apos;s
 					</Link>{" "}
-					personal <span>journal / portfolio</span>, where he explores and
-					shares insights about the world of Software Engineering through code
-					and continuous learning.
+					personal <span>journal</span> / <span>portfolio</span>, where he
+					explores and shares insights about the world of Software Engineering
+					through code and continuous learning.
 				</p>
 			</section>
 		</main>
