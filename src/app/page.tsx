@@ -9,7 +9,7 @@ export default function Home() {
 		<main className="container">
 			<div className={home.hero}>
 				<div className={home.icon}>
-					<FaLayerGroup size={25} color="#FFF" />
+					<FaLayerGroup size={25} />
 				</div>
 
 				<h3>Learning / Writing / Sharing</h3>
