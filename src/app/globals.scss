@@ -1,13 +1,24 @@
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
-	--primary: #0f172a;
+	--background: #fff;
+	--foreground: #0f172a;
+	--icon-color: #fff;
+	--icon-background: #444;
+	--shadow: rgba(0, 0, 0, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
+		--background: #0f172a;
+		--foreground: #fff;
+		--icon-color: #444;
+		--icon-background: #fff;
+		--shadow: rgba(255, 255, 255, 0.25);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		color-scheme: dark;
 	}
 }
 
@@ -18,7 +29,7 @@ body {
 }
 
 body {
-	color: var(--primary);
+	color: var(--foreground);
 	background: var(--background);
 	font-family: "Inter", Arial, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -57,12 +68,6 @@ p {
 	max-width: 1024px;
 	margin: 0 auto;
 	padding: 0 20px;
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
 }
 
 @media (min-width: 768px) {
