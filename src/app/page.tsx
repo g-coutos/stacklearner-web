@@ -12,9 +12,9 @@ export default function Home() {
 					<FaLayerGroup size={25} />
 				</div>
 
-				<h3>Learning / Writing / Sharing</h3>
+				<span>Learning / Writing / Sharing</span>
 				<h1>Stack Learner</h1>
-				<p>Building knowledge in public.</p>
+				<h2>Building knowledge in public.</h2>
 			</div>
 
 			<section className={home.about}>
