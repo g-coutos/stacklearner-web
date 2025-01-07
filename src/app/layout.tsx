@@ -22,6 +22,8 @@ export const metadata: Metadata = {
 		images: [
 			{
 				url: "/og-image.webp",
+				width: 1200,
+				height: 630,
 			},
 		],
 		url: "https://example.com",
