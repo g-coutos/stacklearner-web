@@ -1,0 +1,33 @@
+.form {
+	label {
+		margin-bottom: 0.3rem;
+		display: block;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	input {
+		width: 100%;
+		padding: 0.5rem;
+		margin-bottom: 1rem;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	button {
+		width: fit-content;
+		margin-top: 1rem;
+		padding: 0.2rem;
+		display: block;
+		border: 1px solid;
+		border-radius: 5px;
+		font-size: 0.875rem;
+		background-color: var(--background);
+		color: var(--foreground);
+		cursor: pointer;
+	}
+}
