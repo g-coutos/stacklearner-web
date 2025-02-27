@@ -57,6 +57,10 @@ export default function Page() {
 
 	return (
 		<div className="container">
+			<div className="breadcrumbs">
+				<a href="/admin/dashboard">dashboard</a> / <span>new post</span>
+			</div>
+
 			<h1>Add New Post</h1>
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<div>
@@ -73,7 +77,14 @@ export default function Page() {
 					<label htmlFor="body">body</label>
 					<MDEditor id="body" value={body} onChange={handleBodyChange} />
 				</div>
-				<button type="submit">Save</button>
+
+				<div className={styles.actions}>
+					<button type="submit">Save</button>
+					{/* todo: redirect to new post */}
+					<button type="button">Save && Add Another</button>
+					{/* todo: redirect to actual blog post */}
+					<button type="button">Save && Preview</button>
+				</div>
 			</form>
 		</div>
 	);

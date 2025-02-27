@@ -74,6 +74,24 @@ p {
 	padding: 0 20px;
 }
 
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin-bottom: 1rem;
+	font-size: 0.75rem;
+	color: var(--foreground);
+
+	a {
+		text-decoration: none;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
 @media (min-width: 768px) {
 	h1 {
 		font-size: 2rem;
