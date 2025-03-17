@@ -3,6 +3,8 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 import MDEditor from "@uiw/react-md-editor";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -116,7 +118,8 @@ export default function Page() {
 	return (
 		<div className="container">
 			<div className="breadcrumbs">
-				<a href="/admin/dashboard">dashboard</a> / <span>{post?._id}</span>
+				<Link href="/admin/dashboard">dashboard</Link> /{" "}
+				<span>{post?._id}</span>
 			</div>
 
 			<h1>Edit Post</h1>

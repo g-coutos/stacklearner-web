@@ -6,7 +6,12 @@ import styles from "./styles.module.scss";
 export const Header = () => {
 	return (
 		<header className={styles.header}>
-			<Image src="/me.webp" alt="" width="30" height="30" />
+			<Link
+				href="https://www.linkedin.com/in/guilhermecouto-swe/"
+				target="_blank"
+			>
+				<Image src="/me.webp" alt="" width="30" height="30" />
+			</Link>
 			<Link href="/">stack learner</Link>
 
 			<nav>

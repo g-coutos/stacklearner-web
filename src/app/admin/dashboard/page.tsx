@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import styles from "./styles.module.scss";
+import Link from "next/link";
+import { Pagination } from "@/components/pagination";
 
 interface Post {
 	_id: string;
@@ -15,11 +17,27 @@ interface Post {
 	updated: string;
 }
 
+interface Posts {
+	posts: Post[];
+	posts_total: number;
+	pages_total: number;
+	page: number;
+	has_previus_page: boolean;
+	has_next_page: boolean;
+}
+
 export default function Page() {
-	const [data, setData] = useState<Post[]>([]);
+	const [data, setData] = useState<Posts>({
+		posts: [],
+		posts_total: 0,
+		pages_total: 0,
+		page: 0,
+		has_previus_page: false,
+		has_next_page: false,
+	});
 
 	useEffect(() => {
-		const data = fetch("http://localhost:5000/posts/");
+		const data = fetch("http://localhost:5000/posts?page=1");
 
 		data.then((response) => response.json()).then(setData);
 	}, []);
@@ -42,8 +60,15 @@ export default function Page() {
 				<button onClick={handleLogout}>Logout</button>
 			</div>
 
-			{data.length > 0 ? (
+			{data.posts.length > 0 ? (
 				<>
+					{data.pages_total > 1 && (
+						<Pagination
+							pages_total={data.pages_total}
+							page={data.page}
+							setData={setData}
+						/>
+					)}
 					<span className={styles.subtitle}>
 						<code>blog / posts</code>
 					</span>
@@ -58,7 +83,7 @@ export default function Page() {
 								</tr>
 							</thead>
 							<tbody>
-								{data.map((post: Post) => (
+								{data.posts.map((post: Post) => (
 									<tr key={post._id}>
 										<td>
 											<a href={`/admin/dashboard/posts/${post._id}`}>
@@ -79,7 +104,7 @@ export default function Page() {
 			)}
 
 			<div className={styles.footer}>
-				<a href="/admin/dashboard/posts/new">new post</a>
+				<Link href="/admin/dashboard/posts/new">new post</Link>
 			</div>
 		</div>
 	);

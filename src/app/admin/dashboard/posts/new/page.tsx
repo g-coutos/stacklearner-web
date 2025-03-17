@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import Link from "next/link";
+
 import MDEditor from "@uiw/react-md-editor";
 
 import styles from "./styles.module.scss";
@@ -58,7 +60,7 @@ export default function Page() {
 	return (
 		<div className="container">
 			<div className="breadcrumbs">
-				<a href="/admin/dashboard">dashboard</a> / <span>new post</span>
+				<Link href="/admin/dashboard">dashboard</Link> / <span>new post</span>
 			</div>
 
 			<h1>Add New Post</h1>
