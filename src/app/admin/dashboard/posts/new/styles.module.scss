@@ -1,0 +1,45 @@
+.form {
+	label {
+		width: fit-content;
+		margin-top: 1rem;
+		margin-bottom: 0.3rem;
+		padding: 0.1rem;
+		display: block;
+		border: 1px solid #e3e3e1;
+		border-radius: 5px;
+		font-size: 0.75rem;
+		font-weight: 500;
+		background-color: #ededeb;
+		color: tomato;
+	}
+
+	input {
+		width: 100%;
+		padding: 0.5rem;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	button {
+		width: fit-content;
+		margin-top: 1rem;
+		padding: 0.2rem;
+		display: block;
+		border: 1px solid;
+		border-radius: 5px;
+		font-size: 0.875rem;
+		background-color: var(--background);
+		color: var(--foreground);
+		cursor: pointer;
+	}
+}

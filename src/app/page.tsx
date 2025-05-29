@@ -12,23 +12,22 @@ export default function Home() {
 					<FaLayerGroup size={25} />
 				</div>
 
-				<span>Learning / Writing / Sharing</span>
+				<span>Aprendendo / Escrevendo / Compartilhando</span>
 				<h1>Stack Learner</h1>
-				<h2>Building knowledge in public.</h2>
+				<h2>Construindo conhecimento em público.</h2>
 			</div>
 
 			<section className={home.about}>
 				<p>
-					Stack Learner is{" "}
+					Stack Learner é <span>blog</span> / <span>portfólio</span> pessoal de{" "}
 					<Link
 						href="https://www.linkedin.com/in/guilhermecouto-swe/"
 						target="_blank"
 					>
-						Guilherme&apos;s
-					</Link>{" "}
-					personal <span>blog</span> / <span>portfolio</span>, where he explores
-					and shares insights about the world of Software Engineering through
-					code and continuous learning.
+						Guilherme,
+					</Link>
+					onde ele explora e compartilha insights sobre o mundo da Engenharia de
+					Software por meio de código e aprendizado contínuo.
 				</p>
 			</section>
 		</main>
