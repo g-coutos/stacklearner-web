@@ -21,8 +21,6 @@ export const Header = () => {
 
 			<nav>
 				<Link href="/blog">blog </Link> |{" "}
-				{/* <Link href="/services">services </Link> |{" "}
-				<Link href="/projects">projects </Link> |{" "} */}
 				<Link href="/contact">contact</Link>
 			</nav>
 		</header>
