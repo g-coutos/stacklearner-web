@@ -10,14 +10,19 @@ export const Header = () => {
 				href="https://www.linkedin.com/in/guilhermecouto-swe/"
 				target="_blank"
 			>
-				<Image src="/me.webp" alt="" width="30" height="30" />
+				<Image
+					src="https://avatars.githubusercontent.com/u/88390899?v=4"
+					alt=""
+					width="30"
+					height="30"
+				/>
 			</Link>
 			<Link href="/">stack learner</Link>
 
 			<nav>
 				<Link href="/blog">blog </Link> |{" "}
-				<Link href="/services">services </Link> |{" "}
-				<Link href="/projects">projects </Link> |{" "}
+				{/* <Link href="/services">services </Link> |{" "}
+				<Link href="/projects">projects </Link> |{" "} */}
 				<Link href="/contact">contact</Link>
 			</nav>
 		</header>

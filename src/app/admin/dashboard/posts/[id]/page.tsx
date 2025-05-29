@@ -35,7 +35,7 @@ export default function Page() {
 	});
 
 	useEffect(() => {
-		const data = fetch(`http://127.0.0.1:5000/posts?_id=${id}`);
+		const data = fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?_id=${id}`);
 
 		data.then((response) => response.json()).then(setPost);
 
@@ -49,14 +49,17 @@ export default function Page() {
 			.submitter as HTMLButtonElement;
 
 		try {
-			const response = await fetch("http://127.0.0.1:5000/posts/", {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				credentials: "include",
-				body: JSON.stringify(post),
-			});
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/posts/`,
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					credentials: "include",
+					body: JSON.stringify(post),
+				}
+			);
 
 			if (!response.ok) {
 				const data = await response.json();
@@ -85,10 +88,13 @@ export default function Page() {
 
 	const handlePostDelete = async () => {
 		try {
-			const response = await fetch(`http://127.0.0.1:5000/posts/?_id=${id}`, {
-				method: "DELETE",
-				credentials: "include",
-			});
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/posts/?_id=${id}`,
+				{
+					method: "DELETE",
+					credentials: "include",
+				}
+			);
 
 			if (!response.ok) {
 				const data = await response.json();
@@ -151,11 +157,9 @@ export default function Page() {
 					<button type="submit" value="save">
 						Save
 					</button>
-					{/* todo: redirect to new post */}
 					<button type="submit" value="save_add">
 						Save && Add Another
 					</button>
-					{/* todo: redirect to actual blog post */}
 					<button type="submit" value="save_preview">
 						Save && Preview
 					</button>

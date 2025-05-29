@@ -22,7 +22,7 @@ interface Posts {
 }
 
 export default async function Page() {
-	const data = await fetch("http://localhost:5000/posts");
+	const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
 
 	const posts: Posts = await data.json();
 

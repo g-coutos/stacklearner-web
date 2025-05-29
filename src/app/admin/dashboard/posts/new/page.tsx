@@ -27,17 +27,20 @@ export default function Page() {
 		event.preventDefault();
 
 		try {
-			const response = await fetch("http://127.0.0.1:5000/posts/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				credentials: "include",
-				body: JSON.stringify({
-					title,
-					body,
-				}),
-			});
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/posts/`,
+				{
+					method: "POST",
+					credentials: "include",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						title,
+						body,
+					}),
+				}
+			);
 
 			if (!response.ok) {
 				const errorData = await response.json();

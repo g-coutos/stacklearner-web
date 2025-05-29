@@ -27,6 +27,8 @@ interface Posts {
 }
 
 export default function Page() {
+	const router = useRouter();
+
 	const [data, setData] = useState<Posts>({
 		posts: [],
 		posts_total: 0,
@@ -37,15 +39,13 @@ export default function Page() {
 	});
 
 	useEffect(() => {
-		const data = fetch("http://localhost:5000/posts?page=1");
+		const data = fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?page=1`);
 
 		data.then((response) => response.json()).then(setData);
 	}, []);
 
-	const router = useRouter();
-
 	function handleLogout() {
-		fetch("http://localhost:5000/auth/logout", {
+		fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
 			method: "POST",
 			credentials: "include",
 		});

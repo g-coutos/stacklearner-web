@@ -6,6 +6,25 @@
 	white-space-collapse: break-all;
 }
 
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	margin-bottom: 1.5rem;
+	font-size: 0.75rem;
+	color: var(--foreground);
+
+	a {
+		text-decoration: none;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
 .date {
 	display: block;
 	margin-bottom: 3rem;
@@ -71,6 +90,20 @@
 
 	p {
 		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	pre {
+		font-size: 0.75rem;
+		line-height: 1.45;
+		background-color: #f6f8fa;
+		border-radius: 6px;
+
+		code {
+			padding: 1rem;
+			overflow: auto;
+			display: block;
+		}
 	}
 }
 

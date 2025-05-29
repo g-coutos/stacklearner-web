@@ -1,9 +1,13 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+
 import Link from "next/link";
 
-import { remark } from "remark";
-import html from "remark-html";
-
 import styles from "./styles.module.scss";
+
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 interface Post {
 	_id?: string;
@@ -15,32 +19,49 @@ interface Post {
 	updated: string;
 }
 
-export default async function Page({
-	params,
-}: {
-	params: Promise<{ id: string }>;
-}) {
-	const id = (await params).id;
-	const data = await fetch(`http://127.0.0.1:5000/posts?_id=${id}`);
-	const post: Post = await data.json();
+interface Date {
+	year: number;
+	month: string;
+	day: number;
+}
 
-	const date = new Date(post.created);
-	const year = date.getFullYear();
-	const month = (date.getMonth() + 1).toString().padStart(2, "0");
-	const day = date.getDate();
+export default function Page() {
+	const params = useParams();
 
-	const processed = await remark().use(html).process(post.body);
-	post.body = processed.toString();
+	const [loading, setLoading] = useState(true);
+	const [date, setDate] = useState<Date | null>(null);
+	const [post, setPost] = useState<Post | null>(null);
+
+	useEffect(() => {
+		fetchPost();
+	}, []);
+
+	const fetchPost = async () => {
+		const id = (await params).id;
+		const data = await fetch(
+			`${process.env.NEXT_PUBLIC_API_URL}/posts?_id=${id}`
+		);
+		const post: Post = await data.json();
+
+		const date = new Date(post.created);
+		const year = date.getFullYear();
+		const month = (date.getMonth() + 1).toString().padStart(2, "0");
+		const day = date.getDate();
+
+		setDate({ year, month, day });
+		setPost(post);
+		setLoading(false);
+	};
 
 	return (
 		<div className="container">
-			<div className="breadcrumbs">
+			<div className={styles.breadcrumbs}>
 				<Link href="/blog">blog</Link> / <span>{post?.title}</span>
 			</div>
 			<h1 className={styles.title}>{post?.title}</h1>
 			<div className={styles.date}>
 				<span>
-					{day}/{month}/{year} • by{" "}
+					{date?.day}/{date?.month}/{date?.year} • by{" "}
 					<Link
 						href="https://www.linkedin.com/in/guilhermecouto-swe/"
 						target="_blank"
@@ -49,10 +70,8 @@ export default async function Page({
 					</Link>
 				</span>
 			</div>
-			<div
-				className={styles.markdown}
-				dangerouslySetInnerHTML={{ __html: post?.body }}
-			></div>
+
+			<MarkdownPreview source={post?.body} />
 		</div>
 	);
 }
