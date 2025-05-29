@@ -28,12 +28,12 @@ interface Date {
 export default function Page() {
 	const params = useParams();
 
-	const [loading, setLoading] = useState(true);
 	const [date, setDate] = useState<Date | null>(null);
 	const [post, setPost] = useState<Post | null>(null);
 
 	useEffect(() => {
 		fetchPost();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const fetchPost = async () => {
@@ -50,7 +50,6 @@ export default function Page() {
 
 		setDate({ year, month, day });
 		setPost(post);
-		setLoading(false);
 	};
 
 	return (
