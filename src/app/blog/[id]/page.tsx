@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import Link from "next/link";
@@ -29,6 +29,7 @@ export default function Page() {
 
 	const [date, setDate] = useState<Date | null>(null);
 	const [post, setPost] = useState<Post | null>(null);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		fetchPost();
@@ -49,29 +50,34 @@ export default function Page() {
 
 		setDate({ year, month, day });
 		setPost(post);
+		setLoading(false);
 	};
 
 	return (
-		<Suspense fallback={<span className={styles.loader}>Loading...</span>}>
-			<div className="container">
-				<div className={styles.breadcrumbs}>
-					<Link href="/blog">blog</Link> / <span>{post?.title}</span>
-				</div>
-				<h1 className={styles.title}>{post?.title}</h1>
-				<div className={styles.date}>
-					<span>
-						{date?.day}/{date?.month}/{date?.year} • by{" "}
-						<Link
-							href="https://www.linkedin.com/in/guilhermecouto-swe/"
-							target="_blank"
-						>
-							Guilherme Couto
-						</Link>
-					</span>
-				</div>
+		<>
+			{loading ? (
+				<div className={styles.loader}></div>
+			) : (
+				<div className="container">
+					<div className={styles.breadcrumbs}>
+						<Link href="/blog">blog</Link> / <span>{post?.title}</span>
+					</div>
+					<h1 className={styles.title}>{post?.title}</h1>
+					<div className={styles.date}>
+						<span>
+							{date?.day}/{date?.month}/{date?.year} • by{" "}
+							<Link
+								href="https://www.linkedin.com/in/guilhermecouto-swe/"
+								target="_blank"
+							>
+								Guilherme Couto
+							</Link>
+						</span>
+					</div>
 
-				<MarkdownPreview source={post?.body} />
-			</div>
-		</Suspense>
+					<MarkdownPreview source={post?.body} />
+				</div>
+			)}
+		</>
 	);
 }
