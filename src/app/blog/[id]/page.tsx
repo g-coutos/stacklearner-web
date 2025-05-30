@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import Link from "next/link";
@@ -18,7 +18,6 @@ interface Post {
 	created: string;
 	updated: string;
 }
-
 interface Date {
 	year: number;
 	month: string;
@@ -53,24 +52,26 @@ export default function Page() {
 	};
 
 	return (
-		<div className="container">
-			<div className={styles.breadcrumbs}>
-				<Link href="/blog">blog</Link> / <span>{post?.title}</span>
-			</div>
-			<h1 className={styles.title}>{post?.title}</h1>
-			<div className={styles.date}>
-				<span>
-					{date?.day}/{date?.month}/{date?.year} • by{" "}
-					<Link
-						href="https://www.linkedin.com/in/guilhermecouto-swe/"
-						target="_blank"
-					>
-						Guilherme Couto
-					</Link>
-				</span>
-			</div>
+		<Suspense fallback={<span className={styles.loader}>Loading...</span>}>
+			<div className="container">
+				<div className={styles.breadcrumbs}>
+					<Link href="/blog">blog</Link> / <span>{post?.title}</span>
+				</div>
+				<h1 className={styles.title}>{post?.title}</h1>
+				<div className={styles.date}>
+					<span>
+						{date?.day}/{date?.month}/{date?.year} • by{" "}
+						<Link
+							href="https://www.linkedin.com/in/guilhermecouto-swe/"
+							target="_blank"
+						>
+							Guilherme Couto
+						</Link>
+					</span>
+				</div>
 
-			<MarkdownPreview source={post?.body} />
-		</div>
+				<MarkdownPreview source={post?.body} />
+			</div>
+		</Suspense>
 	);
 }
