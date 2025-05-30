@@ -1,30 +1,12 @@
 "use client";
 
+import { Posts, Post } from "@/interfaces/posts";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { Pagination } from "@/components/pagination";
-
-interface Post {
-	_id: string;
-	title: string;
-	body: string;
-	slug: string;
-	publish: string;
-	created: string;
-	updated: string;
-}
-
-interface Posts {
-	posts: Post[];
-	posts_total: number;
-	pages_total: number;
-	page: number;
-	has_previus_page: boolean;
-	has_next_page: boolean;
-}
 
 export default function Page() {
 	const router = useRouter();
@@ -100,7 +82,7 @@ export default function Page() {
 					</div>
 				</>
 			) : (
-				<p>0 items found.</p>
+				<p>0 posts found.</p>
 			)}
 
 			<div className={styles.footer}>
