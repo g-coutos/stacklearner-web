@@ -9,6 +9,7 @@ import styles from "./styles.module.scss";
 
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
+console.log(process.env.NEXT_PUBLIC_API_URL);
 interface Post {
 	_id?: string;
 	title: string;
