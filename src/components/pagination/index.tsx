@@ -10,7 +10,7 @@ interface PaginationProps {
 
 export const Pagination = ({ pages_total, page, setData }: PaginationProps) => {
 	const handlePage = async (page: number) => {
-		const data = fetch(`http://localhost:5000/posts?page=${page}`);
+		const data = fetch(`{process.env.NEXT_PUBLIC_API_URL}/posts/?page=${page}`);
 
 		data.then((response) => response.json()).then(setData);
 	};

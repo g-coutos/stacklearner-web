@@ -9,7 +9,25 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
+<<<<<<< HEAD
 import styles from "./styles.module.scss";
+=======
+console.log(process.env.NEXT_PUBLIC_API_URL);
+interface Post {
+	_id?: string;
+	title: string;
+	body: string;
+	slug: string;
+	publish: string;
+	created: string;
+	updated: string;
+}
+interface Date {
+	year: number;
+	month: string;
+	day: number;
+}
+>>>>>>> 90bada6beb3eaae9308e1a718029acf198020af7
 
 export default function Page() {
 	const params = useParams();
