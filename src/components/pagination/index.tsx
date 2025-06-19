@@ -1,29 +1,11 @@
+import { IPosts } from "@/interfaces/posts";
 import React from "react";
 import styles from "./styles.module.scss";
-
-interface Post {
-	_id: string;
-	title: string;
-	body: string;
-	slug: string;
-	publish: string;
-	created: string;
-	updated: string;
-}
-
-interface Posts {
-	posts: Post[];
-	posts_total: number;
-	pages_total: number;
-	page: number;
-	has_previus_page: boolean;
-	has_next_page: boolean;
-}
 
 interface PaginationProps {
 	pages_total: number;
 	page: number;
-	setData: React.Dispatch<React.SetStateAction<Posts>>;
+	setData: React.Dispatch<React.SetStateAction<IPosts>>;
 }
 
 export const Pagination = ({ pages_total, page, setData }: PaginationProps) => {

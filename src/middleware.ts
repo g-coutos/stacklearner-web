@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
 	const session = request.cookies.get("session");
-	console.log("Session:", session);
 	const url = request.nextUrl.clone();
 
 	if (!session) {

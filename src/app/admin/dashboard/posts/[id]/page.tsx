@@ -1,5 +1,6 @@
 "use client";
 
+import { IPost } from "@/interfaces/posts";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -10,32 +11,26 @@ import toast, { Toaster } from "react-hot-toast";
 
 import styles from "./styles.module.scss";
 
-interface Post {
-	_id?: string;
-	title: string;
-	body: string;
-	slug?: string;
-	publish?: string;
-	created?: string;
-	updated?: string;
-}
-
 export default function Page() {
 	const { id } = useParams<{ id: string }>();
 
 	const router = useRouter();
 
-	const [post, setPost] = useState<Post>({
+	const [post, setPost] = useState<IPost>({
+		_id: "",
 		title: "",
 		body: "",
 		slug: "",
 		created: "",
 		updated: "",
 		publish: "",
+		tags: [],
 	});
 
 	useEffect(() => {
-		const data = fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts?_id=${id}`);
+		const data = fetch(
+			`${process.env.NEXT_PUBLIC_API_URL}/posts/by-id?_id=${id}`
+		);
 
 		data.then((response) => response.json()).then(setPost);
 
@@ -49,17 +44,14 @@ export default function Page() {
 			.submitter as HTMLButtonElement;
 
 		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/posts/`,
-				{
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					credentials: "include",
-					body: JSON.stringify(post),
-				}
-			);
+			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				credentials: "include",
+				body: JSON.stringify(post),
+			});
 
 			if (!response.ok) {
 				const data = await response.json();
@@ -89,7 +81,7 @@ export default function Page() {
 	const handlePostDelete = async () => {
 		try {
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/posts/?_id=${id}`,
+				`${process.env.NEXT_PUBLIC_API_URL}/posts?_id=${id}`,
 				{
 					method: "DELETE",
 					credentials: "include",
@@ -140,6 +132,22 @@ export default function Page() {
 
 				<label htmlFor="body">body</label>
 				<MDEditor id="body" value={post?.body} onChange={handleBodyChange} />
+
+				<label htmlFor="tags">tags</label>
+				<div className={styles.tags_container}>
+					{post?.tags.length > 0 ? (
+						post?.tags.map((tag, index) => (
+							<div key={index} className={styles.tag}>
+								<span>{tag.name}</span>
+								{/* <button type="button" onClick={() => deleteTag(tag)}>
+									x
+								</button> */}
+							</div>
+						))
+					) : (
+						<span className={styles.tag}>No tags</span>
+					)}
+				</div>
 
 				<label htmlFor="slug">slug</label>
 				<input type="text" id="slug" value={post?.slug} disabled />

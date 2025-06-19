@@ -1,34 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { IDate } from "@/interfaces/date";
+import { IPost } from "@/interfaces/posts";
 
+import { useParams } from "next/navigation";
 import Link from "next/link";
 
-import styles from "./styles.module.scss";
-
+import { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
-interface Post {
-	_id?: string;
-	title: string;
-	body: string;
-	slug: string;
-	publish: string;
-	created: string;
-	updated: string;
-}
-interface Date {
-	year: number;
-	month: string;
-	day: number;
-}
+import styles from "./styles.module.scss";
 
 export default function Page() {
 	const params = useParams();
 
-	const [date, setDate] = useState<Date | null>(null);
-	const [post, setPost] = useState<Post | null>(null);
+	const [date, setDate] = useState<IDate | null>(null);
+	const [post, setPost] = useState<IPost | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
@@ -37,16 +24,16 @@ export default function Page() {
 	}, []);
 
 	const fetchPost = async () => {
-		const id = (await params).id;
+		const id = params.id;
 		const data = await fetch(
-			`${process.env.NEXT_PUBLIC_API_URL}/posts?_id=${id}`
+			`${process.env.NEXT_PUBLIC_API_URL}/posts/by-id?_id=${id}`
 		);
-		const post: Post = await data.json();
+		const post: IPost = await data.json();
 
 		const date = new Date(post.created);
 		const year = date.getFullYear();
 		const month = (date.getMonth() + 1).toString().padStart(2, "0");
-		const day = date.getDate();
+		const day = date.getDate().toString().padStart(2, "0");
 
 		setDate({ year, month, day });
 		setPost(post);
@@ -76,6 +63,14 @@ export default function Page() {
 					</div>
 
 					<MarkdownPreview source={post?.body} />
+
+					<div className={styles.tags_container}>
+						<div className={styles.tag}>
+							{post?.tags?.map((tag, index) => (
+								<p key={index}>{tag.name}</p>
+							))}
+						</div>
+					</div>
 				</div>
 			)}
 		</>

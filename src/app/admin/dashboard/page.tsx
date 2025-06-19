@@ -1,6 +1,6 @@
 "use client";
 
-import { Posts, Post } from "@/interfaces/posts";
+import { IPosts, IPost } from "@/interfaces/posts";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -11,7 +11,7 @@ import { Pagination } from "@/components/pagination";
 export default function Page() {
 	const router = useRouter();
 
-	const [data, setData] = useState<Posts>({
+	const [data, setData] = useState<IPosts>({
 		posts: [],
 		posts_total: 0,
 		pages_total: 0,
@@ -65,7 +65,7 @@ export default function Page() {
 								</tr>
 							</thead>
 							<tbody>
-								{data.posts.map((post: Post) => (
+								{data.posts.map((post: IPost) => (
 									<tr key={post._id}>
 										<td>
 											<a href={`/admin/dashboard/posts/${post._id}`}>

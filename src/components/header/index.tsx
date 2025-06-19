@@ -20,8 +20,7 @@ export const Header = () => {
 			<Link href="/">stack learner</Link>
 
 			<nav>
-				<Link href="/blog">blog </Link> |{" "}
-				<Link href="/contact">contact</Link>
+				<Link href="/blog">blog </Link> | <Link href="/contact">contact</Link>
 			</nav>
 		</header>
 	);

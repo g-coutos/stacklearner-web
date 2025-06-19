@@ -1,4 +1,6 @@
-export interface Post {
+import { ITag } from "./tags";
+
+export interface IPost {
 	_id: string;
 	title: string;
 	body: string;
@@ -6,10 +8,11 @@ export interface Post {
 	publish: string;
 	created: string;
 	updated: string;
+	tags: ITag[];
 }
 
-export interface Posts {
-	posts: Post[];
+export interface IPosts {
+	posts: IPost[];
 	posts_total: number;
 	pages_total: number;
 	page: number;

@@ -57,6 +57,23 @@
 	}
 }
 
+.tags_container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	margin: 1rem 0;
+
+	.tag {
+		padding: 3px 5px;
+		border: 1px solid var(--foreground);
+		border-radius: 3px;
+
+		p {
+			font-size: 0.875rem;
+		}
+	}
+}
+
 @keyframes rotate {
 	100% {
 		transform: rotate(360deg);

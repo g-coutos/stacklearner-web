@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Link from "next/link";
 
@@ -14,6 +14,11 @@ export default function Page() {
 
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
+	const [tags, setTags] = useState<string[]>([]);
+
+	useEffect(() => {
+		searchTags("");
+	}, []);
 
 	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTitle(event.target.value);
@@ -23,24 +28,52 @@ export default function Page() {
 		setBody(value || "");
 	};
 
+	const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setTags(e.target.value.split(",").map((tag) => tag.trim()));
+	};
+
+	const deleteTag = (tag: string) => {
+		setTags(tags.filter((t) => t !== tag));
+	};
+
+	const searchTags = async (inputValue: string) => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/tags?search=${inputValue}`
+			);
+
+			if (!response.ok) {
+				throw new Error("Erro ao buscar tags");
+			}
+
+			const data = await response.json();
+
+			return data.map((tag: { id: number; name: string }) => ({
+				value: tag.id,
+				label: tag.name,
+			}));
+		} catch (error) {
+			console.error("Erro ao buscar tags:", error);
+			return [];
+		}
+	};
+
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/posts/`,
-				{
-					method: "POST",
-					credentials: "include",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						title,
-						body,
-					}),
-				}
-			);
+			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				credentials: "include",
+				body: JSON.stringify({
+					title,
+					body,
+					tags,
+				}),
+			});
 
 			if (!response.ok) {
 				const errorData = await response.json();
@@ -83,11 +116,36 @@ export default function Page() {
 					<MDEditor id="body" value={body} onChange={handleBodyChange} />
 				</div>
 
+				<div>
+					<label htmlFor="tags">tags</label>
+					<input
+						type="text"
+						id="tags"
+						value={tags.join(", ")}
+						onChange={handleTagChange}
+						placeholder="add tags separated by commas"
+					/>
+					{tags.length > 0 && (
+						<div className={styles.tags_container}>
+							{tags.map((tag, index) => {
+								return (
+									tag !== "" && (
+										<div key={index} className={styles.tag}>
+											<span>{tag}</span>
+											<button type="button" onClick={() => deleteTag(tag)}>
+												x
+											</button>
+										</div>
+									)
+								);
+							})}
+						</div>
+					)}
+				</div>
+
 				<div className={styles.actions}>
 					<button type="submit">Save</button>
-					{/* todo: redirect to new post */}
 					<button type="button">Save && Add Another</button>
-					{/* todo: redirect to actual blog post */}
 					<button type="button">Save && Preview</button>
 				</div>
 			</form>

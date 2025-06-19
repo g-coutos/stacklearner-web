@@ -1,21 +1,10 @@
 "use client";
 
+import { IChangeEvent } from "@/interfaces/change-event";
+import { ILogin } from "@/interfaces/login";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import styles from "./styles.module.scss";
-
-interface FormData {
-	username: string;
-	password: string;
-}
-
-interface ChangeEvent {
-	target: {
-		name: string;
-		value: string;
-	};
-}
 
 export default function Page() {
 	const router = useRouter();
@@ -23,9 +12,9 @@ export default function Page() {
 	const [data, setData] = useState({ username: "", password: "" });
 	const [error, setError] = useState("");
 
-	const handleChange = (e: ChangeEvent) => {
+	const handleChange = (e: IChangeEvent) => {
 		const { name, value } = e.target;
-		setData((prev: FormData) => ({ ...prev, [name]: value }));
+		setData((prev: ILogin) => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -1,9 +1,9 @@
-import { Posts } from "@/interfaces/posts";
+import { IPosts } from "@/interfaces/posts";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 
 export default async function Page() {
-	let posts: Posts;
+	let posts: IPosts;
 
 	try {
 		const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);

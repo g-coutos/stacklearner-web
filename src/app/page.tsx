@@ -19,7 +19,8 @@ export default function Home() {
 
 			<section className={home.about}>
 				<p>
-					Stack Learner é <span>blog</span> / <span>portfólio</span> pessoal de{" "}
+					Stack Learner é o <span>blog</span> / <span>portfólio</span> pessoal
+					do{" "}
 					<Link
 						href="https://www.linkedin.com/in/guilhermecouto-swe/"
 						target="_blank"
